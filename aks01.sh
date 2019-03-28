@@ -1,5 +1,6 @@
 #!/bin/bash
 az provider register -n Microsoft.ContainerService
+# https://docs.microsoft.com/en-us/azure/aks/kubernetes-service-principal
 az ad sp create-for-rbac --skip-assignment
 az group create --name 1myResourceGroup --location southeastasia
 az aks create --resource-group 1myResourceGroup --name myK8sCluster --node-count 1 --generate-ssh-keys
