@@ -8,7 +8,7 @@ az aks install-cli
 az aks get-credentials --resource-group 1myResourceGroup --name myK8sCluster --overwrite
 kubectl get nodes
 # file location : https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough
-kubectl apply -f azure-vote.yaml
+kubectl apply -f https://raw.githubusercontent.com/fujute/m18h/master/azure-vote.yaml
 kubectl get service azure-vote-front --watch
 kubectl create clusterrolebinding kubernetes-dashboard --clusterrole=cluster-admin --serviceaccount=kube-system:kubernetes-dashboard
 az aks browse --resource-group 1myResourceGroup --name myK8sCluster
