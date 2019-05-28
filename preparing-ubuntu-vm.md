@@ -21,6 +21,7 @@ sudo apt-get update
 apt-cache policy docker-ce
 sudo apt-get install -y docker-ce
 sudo systemctl status docker
+sudo usermod -aG docker ${USER}
 ```
 
 3. Simple docker file with PHP
