@@ -3,7 +3,8 @@ Perparing ubuntu-16-04 for docker
 https://docs.microsoft.com/en-us/azure/virtual-machines/linux/quick-create-cli
 ```shell
 az group create --name 1myResourceGroup --location southeastasia
-az vm image list --location southeastasia --publisher Canonical --offer UbuntuServer --sku 16.04-LTS --all --output table
+az vm image list --location southeastasia --publisher Canonical \
+  --offer UbuntuServer --sku 16.04-LTS --all --output table
 az vm create \
   --resource-group 1myResourceGroup \
   --name myDockerVM \
