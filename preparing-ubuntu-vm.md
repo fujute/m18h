@@ -1,6 +1,16 @@
 Perparing ubuntu-16-04 for docker 
 1. Create new ubuntu-16-04 vm
 https://docs.microsoft.com/en-us/azure/virtual-machines/linux/quick-create-cli
+```shell
+az group create --name 1myResourceGroup --location southeastasia
+az vm image list --location southeastasia --publisher Canonical --offer UbuntuServer --sku 16.04-LTS --all --output table
+az vm create \
+  --resource-group 1myResourceGroup \
+  --name myDockerVM \
+  --image Canonical:UbuntuServer:16.04-LTS:latest \
+  --admin-username azadmin \
+  --generate-ssh-keys
+```
 2. docker install
 ref: https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-16-04
 3. Simple docker file with PHP
