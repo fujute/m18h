@@ -3,7 +3,7 @@ Perparing ubuntu-16-04 for docker
 https://docs.microsoft.com/en-us/azure/virtual-machines/linux/quick-create-cli
 2. docker install
 ref: https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-16-04
-3. simple dodcker file 
+3. Simple docker file with PHP
 ref: https://hub.docker.com/_/php
 ```shell
 $mkdir php-docker-app  
@@ -14,3 +14,5 @@ COPY src/ /var/www/html/
 $docker build -t php-app .  
 $docker run -p 8080:80 php-app 
 ```
+4.Dockerize a .NET Core application
+https://docs.docker.com/engine/examples/dotnetcore/
