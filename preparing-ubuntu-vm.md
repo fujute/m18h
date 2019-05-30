@@ -52,7 +52,15 @@ ref:
 git clone https://github.com/dotnet/dotnet-docker
 docker build -t aspnetapp .
 docker run -it --rm -p 5000:80 --name aspnetcore_sample aspnetapp
+#docker tag local-image:tagname new-repo:tagname
+#docker push new-repo:tagname 
+docker login 
+docker tag aspnetapp fuju9w/m31appl:v1
+docker push fuju9w/m31appl:v1
 ```
+
+
+docker push fuju9w/m31appl:tagname
 
 # Tips:
 ```shell
