@@ -9,6 +9,7 @@
 * Terraform: TBD
 ## Preparing Kubernetes ( AKS )
 * CLI : https://github.com/fujute/m18h/blob/master/aks01.sh
+* Terraform : https://docs.microsoft.com/en-us/azure/terraform/terraform-create-k8s-cluster-with-tf-and-aks
 ## Azure DevOps and AKS
 * TBD
 
