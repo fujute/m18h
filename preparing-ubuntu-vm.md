@@ -12,7 +12,7 @@ az vm create \
   --admin-username azadmin \
   --generate-ssh-keys
 ```
-2. docker install
+2. Install docker
 ref: https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-16-04
 ```shell
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
@@ -23,8 +23,17 @@ sudo apt-get install -y docker-ce
 sudo systemctl status docker
 sudo usermod -aG docker ${USER}
 ```
+3. Install .NET core
+ref: https://dotnet.microsoft.com/download/linux-package-manager/ubuntu16-04/sdk-current
+```shell
+wget -q https://packages.microsoft.com/config/ubuntu/16.04/packages-microsoft-prod.deb
+sudo dpkg -i packages-microsoft-prod.deb
+sudo apt-get install apt-transport-https
+sudo apt-get update
+sudo apt-get install dotnet-sdk-2.2
+```
 
-3. Simple docker file with PHP
+4. Dockerize a simple PHP application
 ref: https://hub.docker.com/_/php
 ```shell
 $mkdir php-docker-app  
