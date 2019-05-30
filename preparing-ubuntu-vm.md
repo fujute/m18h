@@ -1,4 +1,4 @@
-Perparing ubuntu-16-04 for docker 
+# Perparing ubuntu-16-04 for docker 
 1. Create new ubuntu-16-04 vm
 https://docs.microsoft.com/en-us/azure/virtual-machines/linux/quick-create-cli
 ```shell
@@ -44,11 +44,12 @@ COPY src/ /var/www/html/
 $docker build -t php-app .  
 $docker run -p 8080:80 php-app 
 ```
-4.Dockerize a .NET Core application
+5.Dockerize a .NET Core application
 https://docs.docker.com/engine/examples/dotnetcore/
 
 
-Tips:
+
+# Tips:
 ```shell
 cat report.txt | clip.exe
 ```
