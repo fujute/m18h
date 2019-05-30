@@ -1,6 +1,6 @@
 # Perparing ubuntu-16-04 for docker 
-1. Create new ubuntu-16-04 vm
-https://docs.microsoft.com/en-us/azure/virtual-machines/linux/quick-create-cli
+## 1. Create new ubuntu-16-04 vm
+ref: https://docs.microsoft.com/en-us/azure/virtual-machines/linux/quick-create-cli
 ```shell
 az group create --name 1myResourceGroup --location southeastasia
 az vm image list --location southeastasia --publisher Canonical \
@@ -12,8 +12,7 @@ az vm create \
   --admin-username azadmin \
   --generate-ssh-keys
 ```
-2. Install docker
-
+## 2. Install docker
 ref: https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-16-04
 ```shell
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
@@ -24,8 +23,7 @@ sudo apt-get install -y docker-ce
 sudo systemctl status docker
 sudo usermod -aG docker ${USER}
 ```
-3. Install .NET core
-
+## 3. Install .NET core
 ref: https://dotnet.microsoft.com/download/linux-package-manager/ubuntu16-04/sdk-current
 ```shell
 wget -q https://packages.microsoft.com/config/ubuntu/16.04/packages-microsoft-prod.deb
@@ -34,9 +32,7 @@ sudo apt-get install apt-transport-https
 sudo apt-get update
 sudo apt-get install dotnet-sdk-2.2
 ```
-
-4. Dockerize a simple PHP application
-
+## 4. Dockerize a simple PHP application
 ref: https://hub.docker.com/_/php
 ```shell
 $mkdir php-docker-app  
@@ -47,8 +43,7 @@ COPY src/ /var/www/html/
 $docker build -t php-app .  
 $docker run -p 8080:80 php-app 
 ```
-5.Dockerize a .NET Core application
-
+## 5.Dockerize a .NET Core application
 ref: 
 * https://docs.docker.com/engine/examples/dotnetcore/ 
 * Docker images for ASP.NET Core ( https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/docker/building-net-docker-images?view=aspnetcore-2.2 )
@@ -58,7 +53,6 @@ git clone https://github.com/dotnet/dotnet-docker
 docker build -t aspnetapp .
 docker run -it --rm -p 5000:80 --name aspnetcore_sample aspnetapp
 ```
-
 
 # Tips:
 ```shell
