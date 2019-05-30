@@ -13,6 +13,7 @@ az vm create \
   --generate-ssh-keys
 ```
 2. Install docker
+
 ref: https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-16-04
 ```shell
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
@@ -24,6 +25,7 @@ sudo systemctl status docker
 sudo usermod -aG docker ${USER}
 ```
 3. Install .NET core
+
 ref: https://dotnet.microsoft.com/download/linux-package-manager/ubuntu16-04/sdk-current
 ```shell
 wget -q https://packages.microsoft.com/config/ubuntu/16.04/packages-microsoft-prod.deb
@@ -34,6 +36,7 @@ sudo apt-get install dotnet-sdk-2.2
 ```
 
 4. Dockerize a simple PHP application
+
 ref: https://hub.docker.com/_/php
 ```shell
 $mkdir php-docker-app  
@@ -45,7 +48,10 @@ $docker build -t php-app .
 $docker run -p 8080:80 php-app 
 ```
 5.Dockerize a .NET Core application
-https://docs.docker.com/engine/examples/dotnetcore/ & Docker images for ASP.NET Core ( https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/docker/building-net-docker-images?view=aspnetcore-2.2 )
+
+ref: 
+* https://docs.docker.com/engine/examples/dotnetcore/ 
+* Docker images for ASP.NET Core ( https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/docker/building-net-docker-images?view=aspnetcore-2.2 )
 
 ```shell
 git clone https://github.com/dotnet/dotnet-docker
