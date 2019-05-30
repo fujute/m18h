@@ -13,6 +13,5 @@
 * TBD
 
 ## Ref : step-by-step guide
-* guide 
 * https://docs.microsoft.com/en-us/azure/app-service/app-service-web-get-started-php
 * https://docs.microsoft.com/en-us/azure/app-service/containers/quickstart-dotnetcore 
