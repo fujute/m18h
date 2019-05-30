@@ -43,7 +43,7 @@ COPY src/ /var/www/html/
 $docker build -t php-app .  
 $docker run -p 8080:80 php-app 
 ```
-## 5.Dockerize a .NET Core application
+## 5.Dockerize a ASP.NET Core application
 ref: 
 * https://docs.docker.com/engine/examples/dotnetcore/ 
 * Docker images for ASP.NET Core ( https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/docker/building-net-docker-images?view=aspnetcore-2.2 )
