@@ -45,8 +45,13 @@ $docker build -t php-app .
 $docker run -p 8080:80 php-app 
 ```
 5.Dockerize a .NET Core application
-https://docs.docker.com/engine/examples/dotnetcore/
+https://docs.docker.com/engine/examples/dotnetcore/ & Docker images for ASP.NET Core ( https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/docker/building-net-docker-images?view=aspnetcore-2.2 )
 
+```shell
+git clone https://github.com/dotnet/dotnet-docker
+docker build -t aspnetapp .
+docker run -it --rm -p 5000:80 --name aspnetcore_sample aspnetapp
+```
 
 
 # Tips:
