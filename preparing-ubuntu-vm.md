@@ -46,3 +46,9 @@ $docker run -p 8080:80 php-app
 ```
 4.Dockerize a .NET Core application
 https://docs.docker.com/engine/examples/dotnetcore/
+
+
+Tips:
+```shell
+cat report.txt | clip.exe
+```
