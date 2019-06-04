@@ -14,8 +14,8 @@ az vm create \
 ```
 ## 2. Install docker
 ```shell
-apt-get update && apt-get upgrade -y
-apt-get install -y docker.io
+sudo apt-get update && sudo apt-get upgrade -y
+sudo apt-get install -y docker.io
 sudo systemctl status docker
 sudo usermod -aG docker ${USER}
 ```
