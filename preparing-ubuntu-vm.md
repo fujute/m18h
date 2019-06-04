@@ -11,7 +11,9 @@ az vm create \
   --image Canonical:UbuntuServer:16.04-LTS:latest \
   --admin-username azadmin \
   --generate-ssh-keys
+ az vm list-ip-addresses -g 1myResourceGroup -n myDockerVM
 ```
+
 ## 2. Install docker
 ```shell
 sudo apt-get update && sudo apt-get upgrade -y
