@@ -13,6 +13,13 @@ az vm create \
   --generate-ssh-keys
 ```
 ## 2. Install docker
+```shell
+apt-get update && apt-get upgrade -y
+apt-get install -y docker.io
+sudo systemctl status docker
+sudo usermod -aG docker ${USER}
+```
+or
 ref: https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-16-04
 ```shell
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
