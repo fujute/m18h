@@ -71,7 +71,11 @@ docker push fuju9w/m31appl:v1
 
 docker push fuju9w/m31appl:tagname
 
-# Tips:
+# Tips and samples : 
 ```shell
 cat report.txt | clip.exe
+
+az vm start --name myDockerVM --resource-group 1myResourceGroup
+#az vm stop --name myDockerVM --resource-group 1myResourceGroup
+az vm deallocate --name myDockerVM --resource-group 1myResourceGroup
 ```
