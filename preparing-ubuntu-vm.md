@@ -76,6 +76,7 @@ docker push fuju9w/m31appl:tagname
 cat report.txt | clip.exe
 
 az vm start --name myDockerVM --resource-group 1myResourceGroup
+ az vm list-ip-addresses -g 1myResourceGroup -n myDockerVM
 #az vm stop --name myDockerVM --resource-group 1myResourceGroup
 az vm deallocate --name myDockerVM --resource-group 1myResourceGroup
 ```
