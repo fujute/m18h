@@ -1,4 +1,5 @@
 # Application Modernization Hackathon Resources
+![Flows](https://github.com/fujute/m18h/blob/master/imgs/lab-flows.png)
 ## Preparing Ubuntu VM ( Docker, .net core )
 * Ubuntu VM : https://github.com/fujute/m18h/blob/master/preparing-ubuntu-vm.md
 * Simple .NET Core / PHP / Python
