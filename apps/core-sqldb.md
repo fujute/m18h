@@ -1,5 +1,7 @@
 # Step-by-Step:
-Ref: https://docs.microsoft.com/en-us/azure/sql-database/sql-database-connect-query-php
+Ref:
+* https://docs.microsoft.com/en-us/azure/sql-database/sql-database-connect-query-dotnet-core
+* https://docs.microsoft.com/en-us/azure/sql-database/sql-database-connect-query-php
 
 1. Create App infra with database and storage account 
 * https://github.com/fujute/m18h/blob/master/sample.web.sql-18032019-e.ps1 
