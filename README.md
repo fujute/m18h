@@ -20,7 +20,7 @@
 * CLI : https://github.com/fujute/m18h/blob/master/aks01.sh
 * Terraform : https://docs.microsoft.com/en-us/azure/terraform/terraform-create-k8s-cluster-with-tf-and-aks
 ## Azure DevOps and AKS
-* TBD
+* DevOps project with AKS
 
 ## Ref : step-by-step guide
 * https://docs.microsoft.com/en-us/azure/app-service/app-service-web-get-started-php
