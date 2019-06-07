@@ -6,7 +6,7 @@ https://docs.microsoft.com/en-us/azure/sql-database/sql-database-connect-query-p
 * https://raw.githubusercontent.com/mspnp/reference-architectures/master/managed-web-app/basic-web-app/Paas-Basic/Templates/PaaS-Basic.json
 
 2.Create table and insert sample data
-https://docs.microsoft.com/en-us/sql/t-sql/lesson-1-creating-database-objects?view=sql-server-2017
+* ref: https://docs.microsoft.com/en-us/sql/t-sql/lesson-1-creating-database-objects?view=sql-server-2017
 ```shell
 CREATE TABLE dbo.Products  
    (ProductID int PRIMARY KEY NOT NULL,  
