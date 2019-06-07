@@ -8,7 +8,7 @@
 * https://github.com/fujute/m18h/blob/master/az-cli-webapp-e-sh
 * https://github.com/fujute/m18h/blob/master/az-cli-sqldb-e.sh
 ### code and database connection
-** https://github.com/fujute/m18h/blob/master/apps/core-sqldb.md
+* https://github.com/fujute/m18h/blob/master/apps/core-sqldb.md
 * https://github.com/fujute/m18h/blob/master/apps/php-sqldb.md
 ### containers
 * https://docs.microsoft.com/en-us/azure/app-service/containers/tutorial-dotnetcore-sqldb-app **
