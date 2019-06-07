@@ -5,6 +5,7 @@
 ## Deploying Azure App Services & SQL Server
 * https://github.com/fujute/m18h/blob/master/az-cli-webapp-e-sh
 * https://github.com/fujute/m18h/blob/master/az-cli-sqldb-e.sh
+* https://github.com/fujute/m18h/blob/master/apps/php-sqldb.md
 * https://docs.microsoft.com/en-us/azure/app-service/containers/tutorial-dotnetcore-sqldb-app **
 
 ## Infrastructure as code (IaC) 
