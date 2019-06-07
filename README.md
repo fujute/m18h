@@ -4,9 +4,13 @@
 * Ubuntu VM : https://github.com/fujute/m18h/blob/master/preparing-ubuntu-vm.md
 * Simple .NET Core / PHP / Python
 ## Deploying Azure App Services & SQL Server
+###  Infra
 * https://github.com/fujute/m18h/blob/master/az-cli-webapp-e-sh
 * https://github.com/fujute/m18h/blob/master/az-cli-sqldb-e.sh
-* https://github.com/fujute/m18h/blob/master/apps/core-sqldb.md
+### code and database connection
+** https://github.com/fujute/m18h/blob/master/apps/core-sqldb.md
+* https://github.com/fujute/m18h/blob/master/apps/php-sqldb.md
+### containers
 * https://docs.microsoft.com/en-us/azure/app-service/containers/tutorial-dotnetcore-sqldb-app **
 
 ## Infrastructure as code (IaC) 
