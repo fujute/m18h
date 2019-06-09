@@ -17,7 +17,7 @@
 * ARM : https://github.com/fujute/m18h/blob/master/sample.web.sql-18032019-e.ps1
 * Terraform: TBD
 ## Preparing Kubernetes ( AKS )
-* CLI : https://github.com/fujute/m18h/blob/master/aks01.sh
+* CLI : https://github.com/fujute/m18h/tree/master/aks
 * Terraform : https://docs.microsoft.com/en-us/azure/terraform/terraform-create-k8s-cluster-with-tf-and-aks
 ## Azure DevOps and AKS
 * DevOps project with AKS
