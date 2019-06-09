@@ -1,8 +1,8 @@
 # Application Modernization Hackathon Resources
 ![Flows](https://github.com/fujute/m18h/blob/master/imgs/lab-flows.png)
 ## Preparing Ubuntu VM ( Docker, .net core )
-* Ubuntu VM : https://github.com/fujute/m18h/blob/master/preparing-ubuntu-vm.md
-* Simple .NET Core / PHP / Python
+* Create Ubuntu VM and install  .NET Core, Docker Engine
+* https://github.com/fujute/m18h/blob/master/preparing-ubuntu-vm.md
 ## Deploying Azure App Services & SQL Server
 ###  Infra
 * https://github.com/fujute/m18h/blob/master/az-cli-webapp-e-sh
