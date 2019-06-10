@@ -1,6 +1,6 @@
 AKS
 ##
-sample
+create cluster 
 ```shell
 az aks create --resource-group 1myResourceGroup --name myK8sCluster --node-count 2 --generate-ssh-keys
 az aks list
@@ -10,7 +10,23 @@ az aks get-credentials --resource-group 1myResourceGroup --name myK8sCluster --o
 
 kubectl get nodes
 az aks scale --resource-group 1myResourceGroup --name myK8sCluster --node-count 3
+```
+create deployment
+```shell
+kubectl create deployment aspnetapp images=fuju9w/m31appl:v1
+kubectl get events
+kubectl get deployment aspnetapp --output yaml > aspnetapp01.yaml
+kubectl replace -f aspnetapp01.yaml 
+kubectl get svc aspnetapp 
+kubectl get ep aspnetapp 
+kubectl get deploy,pod,svc,ep
 
+kubectl expose deployment aspnetapp --type=LoadBalancer
+kubectl delete svc aspnetapp
+kubectl delete deployment aspnetapp
+```
+delete cluster
+```shell
 #az aks delete --resource-group 1myResourceGroup --name myK8sCluster
 ```
 ## Create cluster 
