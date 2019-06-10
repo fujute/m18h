@@ -1,6 +1,5 @@
-AKS
-##
-create cluster 
+# AKS
+## create cluster 
 ```shell
 az aks create --resource-group 1myResourceGroup --name myK8sCluster --node-count 2 --generate-ssh-keys
 az aks list
@@ -11,7 +10,7 @@ az aks get-credentials --resource-group 1myResourceGroup --name myK8sCluster --o
 kubectl get nodes
 az aks scale --resource-group 1myResourceGroup --name myK8sCluster --node-count 3
 ```
-create deployment
+## create deployment
 ```shell
 kubectl create deployment aspnetapp images=fuju9w/m31appl:v1
 kubectl get events
@@ -25,11 +24,10 @@ kubectl expose deployment aspnetapp --type=LoadBalancer
 kubectl delete svc aspnetapp
 kubectl delete deployment aspnetapp
 ```
-delete cluster
+## delete cluster
 ```shell
 #az aks delete --resource-group 1myResourceGroup --name myK8sCluster
 ```
-## Create cluster 
+# See Also:  
 * https://github.com/fujute/m18h/blob/master/aks/01-aks.sh
-## Ingress TLS with  Let's Encrypt certificates.
-* https://docs.microsoft.com/en-us/azure/aks/ingress-tls
+* Ingress TLS with  Let's Encrypt certificates.:  https://docs.microsoft.com/en-us/azure/aks/ingress-tls
