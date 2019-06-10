@@ -12,7 +12,7 @@ az aks scale --resource-group 1myResourceGroup --name myK8sCluster --node-count 
 ```
 ## create deployment
 ```shell
-kubectl create deployment aspnetapp images=fuju9w/m31appl:v1
+kubectl create deployment aspnetapp --image="fuju9w/m31appl:v1"
 kubectl get events
 kubectl get deployment aspnetapp --output yaml > aspnetapp01.yaml
 kubectl replace -f aspnetapp01.yaml 
