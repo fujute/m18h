@@ -14,4 +14,5 @@ kubectl create clusterrolebinding kubernetes-dashboard --clusterrole=cluster-adm
 az aks browse --resource-group 1myResourceGroup --name myK8sCluster
 # https://kubernetes.io/docs/reference/kubectl/cheatsheet/
 #az aks scale --resource-group 1myResourceGroup --name myK8sCluster --node-count 3
+#az aks delete --resource-group 1myResourceGroup --name myK8sCluster
 #az group delete --name 1myResourceGroup --yes --no-wait
