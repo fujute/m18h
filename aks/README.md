@@ -28,14 +28,14 @@ kubectl delete deployment aspnetapp
 ```shell
 #az aks delete --resource-group 1myResourceGroup --name myK8sCluster
 ```
-# See Also:  
-* https://github.com/fujute/m18h/blob/master/aks/01-aks.sh
-* Ingress TLS with  Let's Encrypt certificates.:  https://docs.microsoft.com/en-us/azure/aks/ingress-tls
 
-
-# appendix
+# Snippet
 ```shell
         ports:
         - containerPort: 80
           protocol: TCP
 ```
+# See Also:  
+* https://github.com/fujute/m18h/blob/master/aks/01-aks.sh
+* Ingress TLS with  Let's Encrypt certificates.:  https://docs.microsoft.com/en-us/azure/aks/ingress-tls
+
