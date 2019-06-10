@@ -21,6 +21,8 @@ kubectl get ep aspnetapp
 kubectl get deploy,pod,svc,ep
 
 kubectl expose deployment aspnetapp --type=LoadBalancer
+kubectl get service aspnetapp --watch
+
 kubectl delete svc aspnetapp
 kubectl delete deployment aspnetapp
 ```
