@@ -35,9 +35,9 @@ kubectl create -f phpapp01.php
 kubectl get deploy,pod,svc,ep
 
 kubectl get events
-kubectl expose deployment  phpapp --type=LoadBalancer
-kubectl delete deployment phpapp
-```
+kubectl expose deployment  php-app --type=LoadBalancer
+kubectl delete deployment php-app
+```-
 
 ## delete cluster
 ```shell
