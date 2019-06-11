@@ -29,16 +29,15 @@ kubectl delete deployment aspnetapp
 ```
 Option #2
 ```shell
-kubectl create deployment php-app --image=fuju9w/php-app -o yaml --dry-run=true
-kubectl create deployment php-app --image=fuju9w/php-app -o yaml --dry-run=true > phpapp01.yaml
+kubectl create deployment php-app --image=fuju9w/container-info -o yaml --dry-run=true
+kubectl create deployment php-app --image=fuju9w/container-info -o yaml --dry-run=true > phpapp01.yaml
 kubectl create -f phpapp01.php
 kubectl get deploy,pod,svc,ep
 
 kubectl get events
 kubectl expose deployment  php-app --type=LoadBalancer
 kubectl delete deployment php-app
-```-
-
+```
 ## delete cluster
 ```shell
 #az aks delete --resource-group 1myResourceGroup --name myK8sCluster
