@@ -36,6 +36,8 @@ kubectl get deploy,pod,svc,ep
 
 kubectl get events
 kubectl expose deployment  php-app --type=LoadBalancer
+kubectl scale --replicas=2 -f phpapp01.yaml
+kubectl get pods
 kubectl delete deployment php-app
 ```
 ## delete cluster
