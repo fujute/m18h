@@ -11,6 +11,7 @@ kubectl get nodes
 az aks scale --resource-group 1myResourceGroup --name myK8sCluster --node-count 3
 ```
 ## create deployment
+Option #1
 ```shell
 kubectl create deployment aspnetapp --image="fuju9w/m31appl:v1"
 kubectl get events
@@ -26,6 +27,18 @@ kubectl get service aspnetapp --watch
 kubectl delete svc aspnetapp
 kubectl delete deployment aspnetapp
 ```
+Option #2
+```shell
+kubectl create deployment php-app --image=fuju9w/php-app -o yaml --dry-run=true
+kubectl create deployment php-app --image=fuju9w/php-app -o yaml --dry-run=true > phpapp01.yaml
+kubectl create -f phpapp01.php
+kubectl get deploy,pod,svc,ep
+
+kubectl get events
+kubectl expose deployment  phpapp --type=LoadBalancer
+kubectl delete deployment phpapp
+```
+
 ## delete cluster
 ```shell
 #az aks delete --resource-group 1myResourceGroup --name myK8sCluster
