@@ -32,6 +32,12 @@ kubectl delete deployment aspnetapp
 ```
 
 # Snippet
+* dry-run
+```shell
+kubectl run --generator=deployment/v1beta1 php-app --image=fuju9w/php-app -o yaml --dry-run
+```
+* adding port in YAML file 
+
 ```shell
         ports:
         - containerPort: 80
