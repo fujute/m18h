@@ -80,3 +80,5 @@ az vm start --name myDockerVM --resource-group 1myResourceGroup
 #az vm stop --name myDockerVM --resource-group 1myResourceGroup
 az vm deallocate --name myDockerVM --resource-group 1myResourceGroup
 ```
+# See Also:
+https://docs.microsoft.com/en-us/azure/virtual-machines/linux/use-remote-desktop
