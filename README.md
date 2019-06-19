@@ -15,7 +15,7 @@ pplication Modernization Hackathon Resources
 
 ## Infrastructure as code (IaC) 
 * PowerShell & ARM : https://github.com/fujute/m18h/blob/master/sample.web.sql-18032019-e.ps1
-* CLI & ARM : https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-group-template-deploy-cli
+* CLI & ARM : https://github.com/fujute/m18h/blob/master/infra/az-cli-arm-01.sh
 
 ## Preparing Kubernetes ( AKS )
 * CLI : https://github.com/fujute/m18h/tree/master/aks
