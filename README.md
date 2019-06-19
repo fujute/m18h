@@ -1,4 +1,4 @@
-# Application Modernization Hackathon Resources
+pplication Modernization Hackathon Resources
 ![Flows](https://github.com/fujute/m18h/blob/master/imgs/lab-flows.png)
 ## Preparing Ubuntu VM ( Docker, .net core )
 * Create Ubuntu VM and install  .NET Core, Docker Engine
@@ -21,6 +21,7 @@
 * Terraform : https://docs.microsoft.com/en-us/azure/terraform/terraform-create-k8s-cluster-with-tf-and-aks
 ## Azure DevOps and AKS
 * DevOps project with AKS
+* Deploying a multi-container application to Azure Kubernetes Services : https://www.azuredevopslabs.com/labs/vstsextend/kubernetes/
 
 ## Ref : step-by-step guide
 * https://docs.microsoft.com/en-us/azure/app-service/app-service-web-get-started-php
