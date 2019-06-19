@@ -20,7 +20,7 @@ pplication Modernization Hackathon Resources
 * CLI : https://github.com/fujute/m18h/tree/master/aks
 * Terraform : https://docs.microsoft.com/en-us/azure/terraform/terraform-create-k8s-cluster-with-tf-and-aks
 ## Azure DevOps and AKS
-* DevOps project with AKS
+* DevOps project with AKS : https://docs.microsoft.com/en-us/azure/devops-project/azure-devops-project-aks
 * Deploying a multi-container application to Azure Kubernetes Services : https://www.azuredevopslabs.com/labs/vstsextend/kubernetes/
 
 ## Ref : step-by-step guide
