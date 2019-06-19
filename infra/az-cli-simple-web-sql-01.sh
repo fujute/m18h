@@ -5,7 +5,7 @@
 resource_group_name="1D614wRG2"
 deployment_name="D614WDeployment"
 app_name="d61webapp"
-
+sample.web.sql-18032019-e.ps1
 
 az login
 az group create --name "$resource_group_name"  --location southeastasia
