@@ -14,7 +14,8 @@ pplication Modernization Hackathon Resources
 * https://docs.microsoft.com/en-us/azure/app-service/containers/tutorial-dotnetcore-sqldb-app **
 
 ## Infrastructure as code (IaC) 
-* ARM : https://github.com/fujute/m18h/blob/master/sample.web.sql-18032019-e.ps1
+* PowerShell & ARM : https://github.com/fujute/m18h/blob/master/sample.web.sql-18032019-e.ps1
+* CLI & ARM : https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-group-template-deploy-cli
 
 ## Preparing Kubernetes ( AKS )
 * CLI : https://github.com/fujute/m18h/tree/master/aks
