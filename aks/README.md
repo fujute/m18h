@@ -42,7 +42,10 @@ kubectl delete deployment php-app
 ```
 ## browse
 ```shell
-kubectl create clusterrolebinding kubernetes-dashboard --clusterrole=cluster-admin --serviceaccount=kube-system:kubernetes-dashboard
+kubectl create clusterrolebinding kubernetes-dashboard \
+--clusterrole=cluster-admin \
+--serviceaccount=kube-system:kubernetes-dashboard
+
 az aks browse --resource-group 1myResourceGroup --name myK8sCluster
 ```
 
