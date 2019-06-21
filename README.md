@@ -1,4 +1,4 @@
-pplication Modernization Hackathon Resources
+# Application Modernization Hackathon Resources
 ![Flows](https://github.com/fujute/m18h/blob/master/imgs/lab-flows.png)
 ## Preparing Ubuntu VM ( Docker, .net core )
 * Create Ubuntu VM and install  .NET Core, Docker Engine
