@@ -1,14 +1,14 @@
 # Windows Subsystem for Linux
-## install WSL
+## Install WSL
 https://docs.microsoft.com/en-us/windows/wsl/install-win10
 
-## install azure CLI
+## Install azure CLI
 * Install : https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest
 * Update:
 ```shell 
 sudo apt-get update && sudo apt-get install --only-upgrade -y azure-cli
 ```
-## install kubectl
+## Install kubectl
 ```shell
 az login
 sudo az acs kubernetes install-cli
