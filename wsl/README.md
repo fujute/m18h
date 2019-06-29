@@ -8,7 +8,11 @@ https://docs.microsoft.com/en-us/windows/wsl/install-win10
 ```shell 
 sudo apt-get update && sudo apt-get install --only-upgrade -y azure-cli
 ```
-
+## install kubectl
+```shell
+az login
+sudo az acs kubernetes install-cli
+```
 
 ## Install Helm
 ```shell
