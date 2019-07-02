@@ -25,26 +25,44 @@ INSERT dbo.Products (ProductName, ProductID, Price, ProductDescription)
 GO
 ```
 
-3. connect simple PHP to Azure SQL Server 
-* Ref: https://docs.microsoft.com/en-us/azure/sql-database/sql-database-connect-query-php
+3. connect simple python/flask to Azure SQL Server 
+* Ref: https://docs.microsoft.com/en-us/azure/sql-database/sql-database-connect-query-python 
 ```shell
-<?php
-    $serverName = "<<DBserver>>.database.windows.net,1433"; // update to the right one
-    $connectionOptions = array(
-        "Database" => "<<databasename>>", // update to the right one
-        "Uid" => "<<username>>", // update to the right one
-        "PWD" => "<<password>>" // update to the right one
-    );
-    //Establishes the connection
-    $conn = sqlsrv_connect($serverName, $connectionOptions);
-    $tsql= "SELECT ProductName,Price from dbo.Products";
-    $getResults= sqlsrv_query($conn, $tsql);
-    echo ("Reading database name" . PHP_EOL);
-    if ($getResults == FALSE)
-        echo (sqlsrv_errors());
-    while ($row = sqlsrv_fetch_array($getResults, SQLSRV_FETCH_ASSOC)) {
-     echo ($row['ProductName'] . " " . $row['Price'] . PHP_EOL);
-    }
-    sqlsrv_free_stmt($getResults);
-?>
+from datetime import datetime  
+from flask  import render_template, redirect, request
+from flask import Flask
+app = Flask(__name__)
+
+import pyodbc
+server = '<server>.database.windows.net'
+database = '<database>'
+username = '<username>'
+password = '<password>'
+
+driver= '{ODBC Driver 17 for SQL Server}'
+cnxn = pyodbc.connect('DRIVER='+driver+';SERVER='+server+';PORT=1433;DATABASE='+database+';UID='+username+';PWD='+ password)
+cursor = cnxn.cursor()
+cursor.execute("SELECT productname,price FROM products")
+
+dataout=' '
+
+row = cursor.fetchone()
+while row:
+    # print (str(row[0]) + " " + str(row[1]))
+    dataout =  dataout + (str(row[0]) + " " + str(row[1])) +"</br>"
+    row = cursor.fetchone()
+
+
+@app.route("/")
+def hello():
+    return "Hello !! "
+
+@app.route("/products")
+def members():
+    return "<html><body>"+ dataout + "</body></html>"
+
+if __name__ == "__main__":
+    app.run()
+
+cnxn.close()  
 ```
