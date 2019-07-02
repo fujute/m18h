@@ -66,3 +66,9 @@ if __name__ == "__main__":
 
 cnxn.close()  
 ```
+# See Also:
+* https://docs.microsoft.com/en-us/sql/connect/python/python-driver-for-sql-server?view=sql-server-2017
+* https://www.microsoft.com/en-us/sql-server/developer-get-started/python/ubuntu
+* https://pythonspot.com/flask-web-app-with-python/
+* https://docs.microsoft.com/en-us/sql/connect/python/pyodbc/step-1-configure-development-environment-for-pyodbc-python-development?view=sql-server-2017
+* https://docs.microsoft.com/en-us/azure/sql-database/sql-database-connect-query-python
