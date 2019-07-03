@@ -65,6 +65,16 @@ if __name__ == "__main__":
 
 cnxn.close()  
 ```
+requirements.txt
+```shell
+click==6.7
+Flask==1.0.2
+itsdangerous==0.24
+Jinja2==2.10
+MarkupSafe==1.0
+Werkzeug==0.14.1
+pyodbc==4.0.26
+```
 # See Also:
 ## SQL Server
 * https://docs.microsoft.com/en-us/sql/connect/python/python-driver-for-sql-server?view=sql-server-2017
