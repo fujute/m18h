@@ -5,8 +5,8 @@
 * https://github.com/fujute/m18h/blob/master/infra/preparing-ubuntu-vm.md
 ## Deploying Azure App Services & SQL Server
 ###  Infra
-* https://github.com/fujute/m18h/blob/master/az-cli-webapp-e-sh
-* https://github.com/fujute/m18h/blob/master/az-cli-sqldb-e.sh
+* https://github.com/fujute/m18h/blob/master/infra/az-cli-webapp-e-sh
+* https://github.com/fujute/m18h/blob/master/infra/az-cli-sqldb-e.sh
 ### code and database connection
 * https://github.com/fujute/m18h/blob/master/apps/core-sqldb.md
 * https://github.com/fujute/m18h/blob/master/apps/php-sqldb.md
