@@ -61,19 +61,46 @@ def members():
     return "<html><body>"+ dataout + "</body></html>"
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True,host='0.0.0.0')
 
 cnxn.close()  
 ```
 requirements.txt
 ```shell
-click==6.7
-Flask==1.0.2
-itsdangerous==0.24
-Jinja2==2.10
-MarkupSafe==1.0
-Werkzeug==0.14.1
-pyodbc==4.0.26
+Flask<1
+applicationinsights
+```
+Dockerfile
+```shell
+FROM ubuntu:16.04
+MAINTAINER fuju "fuju's email"
+RUN apt-get update -y
+RUN apt-get install -y gnupg apt-utils gcc g++ 
+RUN apt-get install -y curl
+RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - 
+RUN curl https://packages.microsoft.com/config/ubuntu/16.04/prod.list > /etc/apt/sources.list.d/mssql-release.list
+RUN apt-get install -y apt-transport-https
+
+RUN apt-get update -y
+RUN apt-get install -y python-pip python-dev build-essential
+
+RUN ACCEPT_EULA=Y apt-get install -y msodbcsql17
+RUN apt-get install -y python-pyodbc
+RUN pip install pyodbc
+
+COPY . /app
+WORKDIR /app
+RUN pip install -r requirements.txt
+ENTRYPOINT ["python"]
+CMD ["app.py"]
+```
+docker run
+```shell
+docker run -p 80:5000 flask-sample:latest
+```
+Test
+```shell
+$lynx http://127.0.0.1/products
 ```
 # See Also:
 ## SQL Server
