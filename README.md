@@ -11,6 +11,7 @@
 * https://github.com/fujute/m18h/blob/master/apps/core-sqldb.md
 * https://github.com/fujute/m18h/blob/master/apps/php-sqldb.md
 * https://github.com/fujute/m18h/blob/master/apps/flask-sqldb.md
+* https://github.com/fujute/m18h/blob/master/apps/flask-docker-sqldb.md
 ### containers
 * https://docs.microsoft.com/en-us/azure/app-service/containers/tutorial-dotnetcore-sqldb-app **
 
