@@ -2,7 +2,7 @@
 ![Flows](https://github.com/fujute/m18h/blob/master/imgs/lab-flows.png)
 ## Preparing Ubuntu VM ( Docker, .net core )
 * Create Ubuntu VM and install  .NET Core, Docker Engine
-* https://github.com/fujute/m18h/blob/master/preparing-ubuntu-vm.md
+* https://github.com/fujute/m18h/blob/master/infra/preparing-ubuntu-vm.md
 ## Deploying Azure App Services & SQL Server
 ###  Infra
 * https://github.com/fujute/m18h/blob/master/az-cli-webapp-e-sh
