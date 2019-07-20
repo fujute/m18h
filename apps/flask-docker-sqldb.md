@@ -102,6 +102,7 @@ $lynx http://127.0.0.1/products
 ```
 # See Also:
 ## SQL Server
+* Dockerfile: mssql-tools: https://github.com/microsoft/mssql-docker/blob/master/linux/mssql-tools/Dockerfile
 * https://docs.microsoft.com/en-us/sql/connect/python/python-driver-for-sql-server?view=sql-server-2017
 * https://www.microsoft.com/en-us/sql-server/developer-get-started/python/ubuntu
 * https://pythonspot.com/flask-web-app-with-python/
