@@ -78,6 +78,10 @@ az aks create \
  --client-secret <<password>>
  -- location southeastasia
 ```
+* get services
+```shell
+kubectl get svc --namespace kube-system
+```
 
 # See Also:  
 * https://github.com/fujute/m18h/blob/master/aks/01-aks.sh
