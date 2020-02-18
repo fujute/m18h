@@ -46,6 +46,8 @@ kubectl create clusterrolebinding kubernetes-dashboard \
 --clusterrole=cluster-admin \
 --serviceaccount=kube-system:kubernetes-dashboard
 
+az extension add --name aks-preview
+
 az aks browse --resource-group 1myResourceGroup --name myK8sCluster
 ```
 
