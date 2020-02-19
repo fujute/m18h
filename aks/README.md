@@ -1,6 +1,7 @@
 # AKS
 ## create cluster 
 ```shell
+az group create -l southeastasia -n 1myResourceGroup
 az aks create --resource-group 1myResourceGroup --name myK8sCluster --node-count 2 --generate-ssh-keys
 az aks list
 az aks show --resource-group 1myResourceGroup --name myK8sCluster
