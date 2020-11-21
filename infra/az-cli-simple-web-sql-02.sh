@@ -1,4 +1,5 @@
 # ref: https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-group-template-deploy-cli
+# template file : https://raw.githubusercontent.com/mspnp/reference-architectures/master/managed-web-app/basic-web-app/Paas-Basic/Templates/PaaS-Basic.json
 # appName,environment,locationShort,databaseName,administratorLogin,administratorLoginPassword
 # $app_name,dev,dev,appdb6<databasename>,dbuser,<<password>>
 
