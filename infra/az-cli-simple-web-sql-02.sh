@@ -21,4 +21,4 @@ az deployment group create --resource-group "$resource_group_name" --parameters 
 administratorLogin="$adminiLogin" administratorLoginPassword="$adminiLoginPassword" \
 --template-file ./PaaS-Basic.json
 
-#az deployment group delete --name "$deployment_name" --resource-group "$resource_group_name"
+#az group delete --resource-group "$resource_group_name"
