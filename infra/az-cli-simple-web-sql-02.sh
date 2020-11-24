@@ -11,14 +11,8 @@ adminiLoginPassword=<<your password >>
 databaseName=<<Database Name>>
 
 az group create --name "$resource_group_name"  --location southeastasia && 
-az deployment group validate --resource-group "$resource_group_name" --parameters appName="$app_name" environment="dev" locationShort="sea" databaseName="appdb6_$databaseName" \
-administratorLogin="$adminiLogin" administratorLoginPassword="$adminiLoginPassword" \
---template-file ./PaaS-Basic.json
-
-
-az group create --name "$resource_group_name"  --location southeastasia && 
 az deployment group create --resource-group "$resource_group_name" --parameters appName="$app_name" environment="dev" locationShort="sea" databaseName="appdb6_$databaseName" \
 administratorLogin="$adminiLogin" administratorLoginPassword="$adminiLoginPassword" \
---template-file ./PaaS-Basic.json
+--template-file ./PaaS-Basic-s1a.json
 
-#az group delete --resource-group "$resource_group_name"
+#az deployment group delete --name "$deployment_name" --resource-group "$resource_group_name"
