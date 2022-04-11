@@ -23,7 +23,7 @@ spec:
     app: aspnetapp2
   ports:
   - protocol: TCP
-    port: 8080
+    port: 80
     targetPort: 80
 
 ---
@@ -46,5 +46,5 @@ spec:
           service:
             name: aspnetapp2
             port:
-              number: 8080
+              number: 80
         pathType: Exact
