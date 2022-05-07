@@ -1,3 +1,5 @@
+// beased on https://github.com/Azure/bicep/tree/main/docs/examples/101/webapp-privateendpoint-vnet-injection
+// fixed NSG & Added SQLDatabase 
 @description('Name of the VNet')
 param virtualNetworkName string = 'vnet1'
 
@@ -5,10 +7,10 @@ param virtualNetworkName string = 'vnet1'
 param serverFarmName string = 'serverfarm'
 
 @description('Web App 1 name must be unique DNS name worldwide')
-param site1_Name string = 'webapp1-${uniqueString(resourceGroup().id)}'
+param webAppBackend_Name string = 'webappbackend-${uniqueString(resourceGroup().id)}'
 
 @description('Web App 2 name must be unique DNS name worldwide')
-param site2_Name string = 'webapp2-${uniqueString(resourceGroup().id)}'
+param webAppFrontend_Name string = 'webappfrontend-${uniqueString(resourceGroup().id)}'
 
 @description('CIDR of your VNet')
 param virtualNetwork_CIDR string = '10.200.0.0/16'
@@ -53,14 +55,30 @@ param skuSize string = 'P1v2'
 param skuFamily string = 'P1v2'
 
 @description('Name of your Private Endpoint')
-param privateEndpointName string = 'PrivateEndpoint1'
+param privateEndpointName string = 'PrivateEndpoint1Web'
 
 @description('Link name between your Private Endpoint and your Web App')
-param privateLinkConnectionName string = 'PrivateEndpointLink1'
+param privateLinkConnectionName string = 'PrivateEndpointLink1Web'
+
+@description('Name of your Private Endpoint')
+param privateEndpointDBName string = 'PrivateEndpoint2DB'
+
+@description('Link name between your Private Endpoint and your Web App')
+param privateLinkConnectionDBName string = 'PrivateEndpointLink2DB'
+
+
+@description('sqladmin login')
+param sqlAdministratorLogin string = 'sqladmin'
+
+@description('sqladmin password')
+@secure()
+param sqlAdministratorLoginPassword string
 
 var webapp_dns_name = '.azurewebsites.net'
 var privateDNSZoneName = 'privatelink.azurewebsites.net'
 var SKU_tier = 'PremiumV2'
+
+var nsgName = 'nsg-001'
 
 resource virtualNetwork 'Microsoft.Network/virtualNetworks@2020-06-01' = {
   name: virtualNetworkName
@@ -74,6 +92,15 @@ resource virtualNetwork 'Microsoft.Network/virtualNetworks@2020-06-01' = {
   }
 }
 
+resource nsg 'Microsoft.Network/networkSecurityGroups@2021-05-01' = {
+  name: nsgName
+  location: location
+  tags: {
+    Owner: '@fujuTE'
+  }
+  properties: {}   
+}
+
 resource subnet1 'Microsoft.Network/virtualNetworks/subnets@2020-06-01' = {
   parent: virtualNetwork
   name: subnet1Name
@@ -81,25 +108,10 @@ resource subnet1 'Microsoft.Network/virtualNetworks/subnets@2020-06-01' = {
     addressPrefix: subnet1_CIDR
     privateEndpointNetworkPolicies: 'Disabled'
     networkSecurityGroup: {
+      id: nsg.id 
       properties: {
-        securityRules: [
-          {
-            properties: {
-              direction: 'Inbound'
-              protocol: '*'
-              access: 'Allow'
-            }
-          }
-          {
-            properties: {
-              direction: 'Outbound'
-              protocol: '*'
-              access: 'Allow'
-            }
-          }
-        ]
       }
-    }
+    } 
   }
 }
 
@@ -121,23 +133,8 @@ resource subnet2 'Microsoft.Network/virtualNetworks/subnets@2020-06-01' = {
     ]
     privateEndpointNetworkPolicies: 'Enabled'
     networkSecurityGroup: {
+      id: nsg.id 
       properties: {
-        securityRules: [
-          {
-            properties: {
-              direction: 'Inbound'
-              protocol: '*'
-              access: 'Allow'
-            }
-          }
-          {
-            properties: {
-              direction: 'Outbound'
-              protocol: '*'
-              access: 'Allow'
-            }
-          }
-        ]
       }
     }
   }
@@ -156,8 +153,8 @@ resource serverFarm 'Microsoft.Web/serverfarms@2020-06-01' = {
   kind: 'app'
 }
 
-resource webApp1 'Microsoft.Web/sites@2020-06-01' = {
-  name: site1_Name
+resource webAppBackend 'Microsoft.Web/sites@2020-06-01' = {
+  name: webAppBackend_Name
   location: location
   kind: 'app'
   properties: {
@@ -165,8 +162,8 @@ resource webApp1 'Microsoft.Web/sites@2020-06-01' = {
   }
 }
 
-resource webApp2 'Microsoft.Web/sites@2020-06-01' = {
-  name: site2_Name
+resource webAppFrontend 'Microsoft.Web/sites@2020-06-01' = {
+  name: webAppFrontend_Name
   location: location
   kind: 'app'
   properties: {
@@ -175,7 +172,7 @@ resource webApp2 'Microsoft.Web/sites@2020-06-01' = {
 }
 
 resource webApp2AppSettings 'Microsoft.Web/sites/config@2020-06-01' = {
-  parent: webApp2
+  parent: webAppFrontend
   name: 'appsettings'
   properties: {
     WEBSITE_DNS_SERVER: '168.63.129.16'
@@ -184,7 +181,7 @@ resource webApp2AppSettings 'Microsoft.Web/sites/config@2020-06-01' = {
 }
 
 resource webApp1Config 'Microsoft.Web/sites/config@2020-06-01' = {
-  parent: webApp1
+  parent: webAppBackend
   name: 'web'
   properties: {
     ftpsState: 'AllAllowed'
@@ -192,7 +189,7 @@ resource webApp1Config 'Microsoft.Web/sites/config@2020-06-01' = {
 }
 
 resource webApp2Config 'Microsoft.Web/sites/config@2020-06-01' = {
-  parent: webApp2
+  parent: webAppFrontend
   name: 'web'
   properties: {
     ftpsState: 'AllAllowed'
@@ -200,25 +197,25 @@ resource webApp2Config 'Microsoft.Web/sites/config@2020-06-01' = {
 }
 
 resource webApp1Binding 'Microsoft.Web/sites/hostNameBindings@2019-08-01' = {
-  parent: webApp1
-  name: '${webApp1.name}${webapp_dns_name}'
+  parent: webAppBackend
+  name: '${webAppBackend.name}${webapp_dns_name}'
   properties: {
-    siteName: webApp1.name
+    siteName: webAppBackend.name
     hostNameType: 'Verified'
   }
 }
 
 resource webApp2Binding 'Microsoft.Web/sites/hostNameBindings@2019-08-01' = {
-  parent: webApp2
-  name: '${webApp2.name}${webapp_dns_name}'
+  parent: webAppFrontend
+  name: '${webAppFrontend.name}${webapp_dns_name}'
   properties: {
-    siteName: webApp2.name
+    siteName: webAppFrontend.name
     hostNameType: 'Verified'
   }
 }
 
 resource webApp2NetworkConfig 'Microsoft.Web/sites/networkConfig@2020-06-01' = {
-  parent: webApp2
+  parent: webAppFrontend
   name: 'virtualNetwork'
   properties: {
     subnetResourceId: subnet2.id
@@ -236,7 +233,7 @@ resource privateEndpoint 'Microsoft.Network/privateEndpoints@2020-06-01' = {
       {
         name: privateLinkConnectionName
         properties: {
-          privateLinkServiceId: webApp1.id
+          privateLinkServiceId: webAppBackend.id
           groupIds: [
             'sites'
           ]
@@ -275,6 +272,63 @@ resource privateDnsZoneGroup 'Microsoft.Network/privateEndpoints/privateDnsZoneG
         name: 'config1'
         properties: {
           privateDnsZoneId: privateDnsZones.id
+        }
+      }
+    ]
+  }
+}
+
+
+var sqlserverName = 'sqlserver${uniqueString(resourceGroup().id)}'
+var databaseName = 'ligordb001'
+
+
+resource sqlserver 'Microsoft.Sql/servers@2019-06-01-preview' = {
+  name: sqlserverName
+  location: location
+  properties: {
+    administratorLogin: sqlAdministratorLogin
+    administratorLoginPassword: sqlAdministratorLoginPassword
+    version: '12.0'
+  }
+}
+
+resource sqlserverName_databaseName 'Microsoft.Sql/servers/databases@2020-08-01-preview' = {
+  name: '${sqlserver.name}/${databaseName}'
+  location: location
+  sku: {
+    name: 'Basic'
+  }
+  properties: {
+    collation: 'SQL_Latin1_General_CP1_CI_AS'
+    maxSizeBytes: 1073741824
+  }
+}
+
+resource sqlserverName_AllowAllWindowsAzureIps 'Microsoft.Sql/servers/firewallRules@2014-04-01' = {
+  name: '${sqlserver.name}/AllowAllWindowsAzureIps'
+  properties: {
+    endIpAddress: '0.0.0.0'
+    startIpAddress: '0.0.0.0'
+  }
+}
+
+
+resource privateEndpointSQL 'Microsoft.Network/privateEndpoints@2020-06-01' = {
+  name: privateEndpointDBName
+  location: location
+  properties: {
+    subnet: {
+      id: subnet1.id
+    }
+    privateLinkServiceConnections: [
+      {
+        name: privateLinkConnectionDBName
+        properties: {
+          privateLinkServiceId: sqlserver.id
+          groupIds: [
+            'sqlServer'
+          ]
         }
       }
     ]
