@@ -1,3 +1,4 @@
+# original from https://github.com/Azure/bicep/blob/main/docs/examples/201/web-app-sql-database/main.bicep 
 @allowed([
   'F1'
   'D1'
