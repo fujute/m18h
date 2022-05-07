@@ -1,4 +1,5 @@
 // original from https://github.com/Azure/bicep/blob/main/docs/examples/201/web-app-sql-database/main.bicep 
+// fixed App Insight with  create new logAnalyticsWorkspace  and use id for App Insight
 @allowed([
   'F1'
   'D1'
@@ -29,6 +30,9 @@ var hostingPlanName = 'hostingplan${uniqueString(resourceGroup().id)}'
 var webSiteName = 'webSite${uniqueString(resourceGroup().id)}'
 var sqlserverName = 'sqlserver${uniqueString(resourceGroup().id)}'
 var databaseName = 'sampledb'
+
+var environmentName = 'Production'
+var costCenterName = 'IT'
 
 resource sqlserver 'Microsoft.Sql/servers@2019-06-01-preview' = {
   name: sqlserverName
@@ -91,7 +95,28 @@ resource webSiteConnectionStrings 'Microsoft.Web/sites/config@2020-06-01' = {
   }
 }
 
-resource AppInsights_webSiteName 'Microsoft.Insights/components@2018-05-01-preview' = {
+
+param logAnalyticsWorkspaceName string = 'la-${uniqueString(resourceGroup().id)}'
+
+resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2020-03-01-preview' = {
+  name: logAnalyticsWorkspaceName
+  location: location
+  tags: {
+    Environment: environmentName
+    CostCenter: costCenterName
+  }
+  properties: any({
+    retentionInDays: 30
+    features: {
+      searchVersion: 1
+    }
+    sku: {
+      name: 'PerGB2018'
+    }
+  })
+}
+
+resource AppInsights_webSiteName 'Microsoft.Insights/components@2020-02-02' = {
   name: 'AppInsights${webSite.name}'
   location: location
   tags: {
@@ -101,5 +126,6 @@ resource AppInsights_webSiteName 'Microsoft.Insights/components@2018-05-01-previ
   kind: 'web'
   properties: {
     Application_Type: 'web'
+    WorkspaceResourceId: logAnalyticsWorkspace.id
   }
 }
