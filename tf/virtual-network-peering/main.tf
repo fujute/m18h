@@ -45,6 +45,8 @@ resource "azurerm_subnet" "second-subnet2" {
   address_prefixes     = ["192.168.2.0/24"]
 }
 
+// vnet peering 
+
 resource "azurerm_virtual_network_peering" "first-to-second" {
   name                         = "first-to-second"
   resource_group_name          = azurerm_resource_group.example.name
@@ -65,3 +67,43 @@ resource "azurerm_virtual_network_peering" "second-to-first" {
   allow_gateway_transit        = false
   use_remote_gateways          = false
 }
+
+// Azure VM in first/first-subnet2
+resource "azurerm_network_interface" "first" {
+  name                = "${var.prefix}-nic"
+  resource_group_name = azurerm_resource_group.example.name
+  location            = azurerm_resource_group.example.location
+
+  ip_configuration {
+    name                          = "first-subnet2"
+    subnet_id                     = azurerm_subnet.first-subnet2.id
+    private_ip_address_allocation = "Dynamic"
+  }
+}
+
+resource "azurerm_linux_virtual_machine" "main" {
+  name                            = "${var.prefix}-vm"
+  resource_group_name             = azurerm_resource_group.example.name
+  location                        = azurerm_resource_group.example.location
+  size                            = "Standard_D2s_v3"
+  admin_username                  = "${var.username}"
+  admin_password                  = "${var.password}"
+  disable_password_authentication = false
+  network_interface_ids = [
+    azurerm_network_interface.first.id,
+  ]
+
+  source_image_reference {
+    publisher = "Canonical"
+    offer     = "UbuntuServer"
+    sku       = "18.04-LTS"
+    version   = "latest"
+  }
+
+  os_disk {
+    storage_account_type = "Standard_LRS"
+    caching              = "ReadWrite"
+  }
+}
+
+//---
