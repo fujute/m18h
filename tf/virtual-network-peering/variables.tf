@@ -12,3 +12,14 @@ variable "location" {
   description = "The Azure location where all resources in this example should be created"
   default = "eastasia"
 }
+
+
+variable "username" {
+  description = "The Azure location where all resources in this example should be created"
+  default = "azureuser"
+}
+
+
+variable "password" {
+  description = "The Azure location where all resources in this example should be created"
+}
