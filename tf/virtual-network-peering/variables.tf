@@ -21,5 +21,5 @@ variable "username" {
 
 
 variable "password" {
-  description = "The Azure location where all resources in this example should be created"
+  description = "The VM password in this example should be created"
 }
