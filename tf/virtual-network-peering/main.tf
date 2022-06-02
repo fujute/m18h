@@ -3,7 +3,7 @@ provider "azurerm" {
 }
 
 resource "azurerm_resource_group" "example" {
-  name     = "${var.prefix}-resources"
+  name     = "1TL-${var.prefix}-resources-rg"
   location = var.location
 }
 
@@ -70,7 +70,7 @@ resource "azurerm_virtual_network_peering" "second-to-first" {
 
 // Azure VM in first/first-subnet2
 resource "azurerm_network_interface" "first" {
-  name                = "${var.prefix}-nic"
+  name                = "${var.prefix}-nic11"
   resource_group_name = azurerm_resource_group.example.name
   location            = azurerm_resource_group.example.location
 
@@ -82,7 +82,7 @@ resource "azurerm_network_interface" "first" {
 }
 
 resource "azurerm_linux_virtual_machine" "main" {
-  name                            = "${var.prefix}-vm"
+  name                            = "${var.prefix}-vm1"
   resource_group_name             = azurerm_resource_group.example.name
   location                        = azurerm_resource_group.example.location
   size                            = "Standard_D2s_v3"
@@ -106,4 +106,89 @@ resource "azurerm_linux_virtual_machine" "main" {
   }
 }
 
-//---
+// -- public IP for second VM----
+
+resource "azurerm_public_ip" "pip" {
+  name                = "${var.prefix}-pip"
+  resource_group_name = azurerm_resource_group.example.name
+  location            = azurerm_resource_group.example.location
+  allocation_method   = "Dynamic"
+}
+
+
+resource "azurerm_network_interface" "second-internal" {
+  name                      = "${var.prefix}-nic21"
+  resource_group_name       = azurerm_resource_group.example.name
+  location                  = azurerm_resource_group.example.location
+
+  ip_configuration {
+    name                          = "internal"
+    subnet_id                     = azurerm_subnet.second-subnet2.id
+    private_ip_address_allocation = "Dynamic"
+  }
+}
+
+resource "azurerm_network_interface" "second-pip" {
+  name                = "${var.prefix}-nic22"
+  resource_group_name = azurerm_resource_group.example.name
+  location            = azurerm_resource_group.example.location
+
+  ip_configuration {
+    name                          = "primary"
+    subnet_id                     = azurerm_subnet.second-subnet2.id
+    private_ip_address_allocation = "Dynamic"
+    public_ip_address_id          = azurerm_public_ip.pip.id
+  }
+}
+
+resource "azurerm_network_security_group" "webserver" {
+  name                = "tls_webserver"
+  location            = azurerm_resource_group.example.location
+  resource_group_name = azurerm_resource_group.example.name
+  security_rule {
+    access                     = "Allow"
+    direction                  = "Inbound"
+    name                       = "tls"
+    priority                   = 100
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    source_address_prefix      = "*"
+    destination_port_range     = "443"
+    destination_address_prefix = azurerm_network_interface.second-internal.private_ip_address
+  }
+}
+
+resource "azurerm_network_interface_security_group_association" "example" {
+  network_interface_id      = azurerm_network_interface.second-internal.id
+  network_security_group_id = azurerm_network_security_group.webserver.id
+}
+
+// -- deploy second VM in second vnet ----
+
+resource "azurerm_linux_virtual_machine" "linuxvm2" {
+  name                            = "${var.prefix}-vm2"
+  resource_group_name             = azurerm_resource_group.example.name
+  location                        = azurerm_resource_group.example.location
+  size                            = "Standard_F2"
+  admin_username                  = "adminuser"
+  admin_password                  = "${var.password}"
+  disable_password_authentication = false
+  network_interface_ids = [
+    azurerm_network_interface.second-pip.id,
+    azurerm_network_interface.second-internal.id,
+  ]
+
+  source_image_reference {
+    publisher = "Canonical"
+    offer     = "UbuntuServer"
+    sku       = "18.04-LTS"
+    version   = "latest"
+  }
+
+  os_disk {
+    storage_account_type = "Standard_LRS"
+    caching              = "ReadWrite"
+  }
+}
+
+// End of File
