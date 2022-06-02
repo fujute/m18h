@@ -1,0 +1,79 @@
+<mxfile host="65bd71144e">
+    <diagram id="9LzdtpZffCVEmGnxQvmV" name="Page-1">
+        <mxGraphModel dx="1287" dy="598" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="25" style="edgeStyle=none;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontFamily=Lucida Console;" edge="1" parent="1" source="2" target="13">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="2" value="" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="130" y="100" width="350" height="250" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" value="" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="150" y="180" width="120" height="140" as="geometry"/>
+                </mxCell>
+                <mxCell id="4" value="" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="320" y="180" width="120" height="140" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="fx1-network1: 10.0.0.0/16" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontFamily=Lucida Console;" vertex="1" parent="1">
+                    <mxGeometry x="185" y="113.75" width="200" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" value="" style="verticalLabelPosition=bottom;html=1;verticalAlign=top;align=center;strokeColor=none;fillColor=#00BEF2;shape=mxgraph.azure.virtual_network;pointerEvents=1;" vertex="1" parent="1">
+                    <mxGeometry x="140" y="110" width="50" height="27.500000000000004" as="geometry"/>
+                </mxCell>
+                <mxCell id="7" value="subnet1:10.0.1.0/24" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontFamily=Lucida Console;" vertex="1" parent="1">
+                    <mxGeometry x="145" y="160" width="150" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" value="subnet2:10.0.2.0/24&amp;nbsp;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontFamily=Lucida Console;" vertex="1" parent="1">
+                    <mxGeometry x="310" y="160" width="160" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="11" value="fx1-vm1" style="verticalLabelPosition=bottom;html=1;verticalAlign=top;align=center;strokeColor=none;fillColor=#00BEF2;shape=mxgraph.azure.virtual_machine;fontFamily=Lucida Console;" vertex="1" parent="1">
+                    <mxGeometry x="330" y="200" width="50" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="12" value="fx1-nic11" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontFamily=Lucida Console;" vertex="1" parent="1">
+                    <mxGeometry x="320" y="280" width="80" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="26" style="edgeStyle=none;html=1;fontFamily=Lucida Console;" edge="1" parent="1" source="13" target="2">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="13" value="" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="560" y="100" width="350" height="250" as="geometry"/>
+                </mxCell>
+                <mxCell id="14" value="" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="580" y="180" width="120" height="140" as="geometry"/>
+                </mxCell>
+                <mxCell id="15" value="" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="750" y="180" width="120" height="140" as="geometry"/>
+                </mxCell>
+                <mxCell id="16" value="fx1-network1: 192.168.0.0/16" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontFamily=Lucida Console;" vertex="1" parent="1">
+                    <mxGeometry x="620" y="113.75" width="220" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="17" value="" style="verticalLabelPosition=bottom;html=1;verticalAlign=top;align=center;strokeColor=none;fillColor=#00BEF2;shape=mxgraph.azure.virtual_network;pointerEvents=1;" vertex="1" parent="1">
+                    <mxGeometry x="570" y="110" width="50" height="27.500000000000004" as="geometry"/>
+                </mxCell>
+                <mxCell id="18" value="subnet1:192.168.1.0/24" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontFamily=Lucida Console;" vertex="1" parent="1">
+                    <mxGeometry x="565" y="160" width="170" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="19" value="subnet2:192.168.2.0/24&amp;nbsp;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontFamily=Lucida Console;" vertex="1" parent="1">
+                    <mxGeometry x="730" y="160" width="180" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="20" value="fx1-vm2" style="verticalLabelPosition=bottom;html=1;verticalAlign=top;align=center;strokeColor=none;fillColor=#00BEF2;shape=mxgraph.azure.virtual_machine;fontFamily=Lucida Console;" vertex="1" parent="1">
+                    <mxGeometry x="760" y="200" width="50" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="21" value="fx1-nic21&lt;br&gt;fx1-nic22" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontFamily=Lucida Console;" vertex="1" parent="1">
+                    <mxGeometry x="750" y="270" width="80" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="24" style="edgeStyle=none;html=1;entryX=1.067;entryY=0.509;entryDx=0;entryDy=0;entryPerimeter=0;fontFamily=Lucida Console;" edge="1" parent="1" source="22" target="23">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="22" value="" style="html=1;verticalLabelPosition=bottom;align=center;labelBackgroundColor=#ffffff;verticalAlign=top;strokeWidth=2;strokeColor=#0080F0;shadow=0;dashed=0;shape=mxgraph.ios7.icons.user;fontFamily=Lucida Console;" vertex="1" parent="1">
+                    <mxGeometry x="950" y="265" width="30" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="23" value="pip" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontFamily=Lucida Console;" vertex="1" parent="1">
+                    <mxGeometry x="825" y="270" width="40" height="20" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
