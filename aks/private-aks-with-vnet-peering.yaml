@@ -59,14 +59,14 @@ az network vnet create \
     --subnet-prefix 192.168.2.0/27
 
 ## ToDO.
-# 1. ssh to vm in  $APPDEV_VNET
+# 1. create devVM and ssh to the devVM in  $APPDEV_VNET 
 # 1.1. devvm$ az aks get-credentials --resource-group 001-TTB-AppInfra-007-RG --name myAKSCluster008
 # 1.2. devvm$ https://learn.microsoft.com/en-us/cli/azure/install-azure-cli-linux?pivots=apt
 # 1.33. devvm$ sudo az aks install-cli
 #
-# 2.vnet peering
-# 3.create private DNS Zone 
-# 3.1 Add entry in Private DNS Zone
+# 2.VENET peering  $APPINFRA_VNET  with  $APPDEV_VNET 
+# 3.create private DNS Zone for $APPDEV_VNET by getting sample data from MC_ group
+# 3.1 Add entry in Private DNS Zone for $APPDEV_VNET 
 #
 # 4.kubectl get nodes
 #
