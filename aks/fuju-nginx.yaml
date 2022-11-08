@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: fuju-nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: fuju-nginx
+  template:
+    metadata:
+      labels:
+        app: fuju-nginx
+    spec:
+      containers:
+      - name: fuju-nginx
+        image: nginx:1.14.2
+        ports:
+        - containerPort: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fuju-nginx
+  annotations:
+    service.beta.kubernetes.io/azure-load-balancer-internal: "true"
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+  selector:
+    app: fuju-nginx
+  
