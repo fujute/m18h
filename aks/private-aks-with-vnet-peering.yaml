@@ -24,7 +24,7 @@ SUBNET_ID=$(az network vnet subnet show --resource-group $APPINFRA_RG --vnet-nam
 
 # Create an Azure AD group
 az ad group create --display-name myAKSAdminGroup --mail-nickname myAKSAdminGroup
-AAD_AKS_ADMIN_GROUP=$(az ad group list --filter "displayname eq 'exzillagrp'" --query [].id -o tsv)
+AAD_AKS_ADMIN_GROUP=$(az ad group list --filter "displayname eq 'myAKSAdminGroup'" --query [].id -o tsv)
 
 az aks create \
     --resource-group $APPINFRA_RG \
