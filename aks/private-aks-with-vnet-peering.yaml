@@ -80,4 +80,4 @@ az network vnet create \
 # 7. Bastion  " https://learn.microsoft.com/en-us/azure/bastion/tutorial-create-host-portal " 
 # 8. Create PostgreSQL with private Endpoint and connect from AKS via private Endpoint
 # 9. Loggin and debuging 
-# 10. AKS and Application Insight
+# 10. AKS , Azure Monitor, Log Analytics , and Application Insight ( https://learn.microsoft.com/en-us/azure/azure-monitor/containers/container-insights-overview )
