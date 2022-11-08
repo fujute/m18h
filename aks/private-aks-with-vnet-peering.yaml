@@ -60,9 +60,9 @@ az network vnet create \
 
 ## ToDO.
 # 1. create devVM and ssh to the devVM in  $APPDEV_VNET 
-# 1.1. devvm$ az aks get-credentials --resource-group 001-TTB-AppInfra-007-RG --name myAKSCluster008
-# 1.2. devvm$ https://learn.microsoft.com/en-us/cli/azure/install-azure-cli-linux?pivots=apt
-# 1.33. devvm$ sudo az aks install-cli
+# 1.1. devvm$ https://learn.microsoft.com/en-us/cli/azure/install-azure-cli-linux?pivots=apt
+# 1.2. devvm$ az aks get-credentials --resource-group 001-TTB-AppInfra-007-RG --name myAKSCluster008
+# 1.3. devvm$ sudo az aks install-cli
 #
 # 2.VENET peering  $APPINFRA_VNET  with  $APPDEV_VNET 
 # 3.create private DNS Zone for $APPDEV_VNET by getting sample data from MC_ group
