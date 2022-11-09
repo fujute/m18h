@@ -22,7 +22,7 @@ az network vnet create \
 
 SUBNET_ID=$(az network vnet subnet show --resource-group $APPINFRA_RG --vnet-name $APPINFRA_VNET --name myAKSSubnet --query id -o tsv)
 
-# Create an Azure AD group
+# Create an Azure AD group ( ref: https://learn.microsoft.com/en-us/azure/aks/managed-aad ) 
 az ad group create --display-name myAKSAdminGroup --mail-nickname myAKSAdminGroup
 AAD_AKS_ADMIN_GROUP=$(az ad group list --filter "displayname eq 'myAKSAdminGroup'" --query [].id -o tsv)
 
