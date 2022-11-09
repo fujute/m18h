@@ -79,5 +79,6 @@ az network vnet create \
 # 6. Authenticate with Azure Container Registry from Azure Kubernetes Service " https://learn.microsoft.com/en-us/azure/aks/cluster-container-registry-integration?tabs=azure-cli " 
 # 7. Bastion  " https://learn.microsoft.com/en-us/azure/bastion/tutorial-create-host-portal " 
 # 8. Create PostgreSQL with private Endpoint and connect from AKS via private Endpoint
-# 9. Loggin and debuging 
+# 9. Logging and debuging 
 # 10. AKS , Azure Monitor, Log Analytics , and Application Insight ( https://learn.microsoft.com/en-us/azure/azure-monitor/containers/container-insights-overview )
+# 11. "https://learn.microsoft.com/en-us/azure/aks/azure-ad-rbac " 
