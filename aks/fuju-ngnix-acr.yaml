@@ -16,7 +16,7 @@ app: fuju-nginx
     spec:
 containers:
 - name: fuju-nginx
-image: myacregistry001.azurecr.io/nginx:v1
+image: myacregistry009.azurecr.io/nginx:v1
 ports:
 - containerPort: 80
 
@@ -32,3 +32,4 @@ spec:
   ports:
   - port: 80
   selector:
+    app: fuju-nginx
