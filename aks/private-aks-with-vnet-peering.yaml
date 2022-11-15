@@ -1,3 +1,4 @@
+#!/bin/bash
 # AKS - Private Cluster with v-net peering
 # Resource Group
 APPINFRA_RG=001-Lab-AppInfra-007-RG
