@@ -136,6 +136,8 @@ az vm run-command invoke \
 
 # psql "host=$PROJECT_ID.private.postgres.database.azure.com port=5432 dbname={your_database} user=pgadmin password={your_password} sslmode=require"
 
+echo "PostgreSQL : $RANDOM_PWD "
+
 
 # Todo:
 # 1. https://learn.microsoft.com/en-us/azure/postgresql/flexible-server/tutorial-django-aks-database
