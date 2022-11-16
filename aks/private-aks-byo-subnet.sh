@@ -15,6 +15,8 @@ _RN=009
 PROJECT_ID=FUJU-$(( $RANDOM %100 + 1 ))
 APPINFRA_RG=$_SN-Lab-AppInfra-$_RN-RG
 APPDEV_RG=$_SN-Lab-AppDev-$_RN-RG
+##
+RANDOM_PWD=$(openssl rand -base64 12)
 # v-net
 APPINFRA_VNET=AppInfraVnet
 # private-cluster-name
@@ -111,6 +113,29 @@ az acr import  -n $MYACR --source docker.io/library/nginx:latest --image nginx:v
 #curl -s -Lo fuju-nginx https://raw.githubusercontent.com/fujute/m18h/master/aks/fuju-nginx.yaml
 # image: $MYACR.azurecr.io/nginx:v1
 
+# create private dns zone
+az network private-dns zone create -g $APPINFRA_RG -n $PROJECT_ID.private.postgres.database.azure.com
+
+# echo $RANDOM_PWD
+DBSUBNET_ID=$(az network vnet subnet show --resource-group $APPINFRA_RG --vnet-name $APPINFRA_VNET --name MyDBSubnet --query id -o tsv)
+
+PSQL_DNS=$(az network private-dns zone show --resource-group  $APPINFRA_RG -n $PROJECT_ID.private.postgres.database.azure.com  --query id -o tsv)
+
+az postgres flexible-server create --resource-group $APPINFRA_RG --name ${PROJECT_ID}psqlsvr \
+  --admin-user pgadmin --admin-password $RANDOM_PWD \
+  --sku-name Standard_B1ms --tier Burstable --version 13 \
+  --vnet $APPINFRA_VNET  --subnet MyDBSubnet --location  $LOCATION \
+  --private-dns-zone $PSQL_DNS
+
+az vm run-command invoke \
+   -g $APPINFRA_RG \
+   -n myVM$PROJECT_ID \
+   --command-id RunShellScript \
+   --scripts "sudo apt-get update -y && sudo apt-get upgrade -y && sudo apt install  postgresql-client -y"
+
+
+# psql "host=$PROJECT_ID.private.postgres.database.azure.com port=5432 dbname={your_database} user=pgadmin password={your_password} sslmode=require"
+
+
 # Todo:
-# 1. https://www.postgresql.org/download/linux/ubuntu/
-# 2. https://learn.microsoft.com/en-us/azure/postgresql/flexible-server/tutorial-django-aks-database
+# 1. https://learn.microsoft.com/en-us/azure/postgresql/flexible-server/tutorial-django-aks-database
