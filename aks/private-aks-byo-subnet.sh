@@ -110,7 +110,8 @@ az vm run-command invoke \
 # Testing 
 # https://learn.microsoft.com/en-us/azure/aks/cluster-container-registry-integration?tabs=azure-cli
 az acr import  -n $MYACR --source docker.io/library/nginx:latest --image nginx:v1
-#curl -s -Lo fuju-nginx https://raw.githubusercontent.com/fujute/m18h/master/aks/fuju-nginx.yaml
+#curl -s -Lo fuju-nginx.yaml https://raw.githubusercontent.com/fujute/m18h/master/aks/fuju-nginx.yaml
+#kubectl apply -f fuju-ngix.yaml
 # image: $MYACR.azurecr.io/nginx:v1
 
 # create private dns zone
