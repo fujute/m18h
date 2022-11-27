@@ -1,0 +1,14 @@
+{
+   "firstName": "Teddy",
+   "lastName": "Graham",
+   "gender": "male",
+   "age": 36,
+   "address": {
+       "streetAddress": "87",
+       "city": "Payathai",
+       "province": "Bangkok"
+   },
+   "phoneNumbers": [
+       { "type": "office", "number": "8855522344" }
+   ]
+}
