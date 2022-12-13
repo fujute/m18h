@@ -1,6 +1,6 @@
 #!/bin/bash
 # Modified from Original from  https://learn.microsoft.com/en-us/azure/aks/limit-egress-traffic  to run AKS with kubenet
-# 12-12-2022
+# 
 _RN=01
 PREFIX="aks-egress"
 RG="101-${PREFIX}-rg"
@@ -10,6 +10,7 @@ AKSNAME="${PREFIX}"
 VNET_NAME="${PREFIX}-vnet"
 AKSSUBNET_NAME="aks-subnet"
 VMSUBNET_NAME="vm-subnet"
+DBSUBNET_NAME="pg-subnet"
 # DO NOT CHANGE FWSUBNET_NAME - This is currently a requirement for Azure Firewall.
 FWSUBNET_NAME="AzureFirewallSubnet"
 FWNAME="${PREFIX}-fw"
@@ -22,6 +23,11 @@ FWROUTE_NAME_INTERNET="${PREFIX}-fwinternet"
 MYACR=myacregistry001
 PROJECT_ID=001
 VMADMIN_USERNAME=azureadmin 
+PGADMIN_USERNAME=pgadmin 
+##
+RANDOM_ID=FUJU-$(( $RANDOM %100 + 1 ))
+##
+RANDOM_PWD=$(openssl rand -base64 12)
 ##
 
 # Create Resource Group
@@ -196,21 +202,73 @@ az acr import  -n $MYACR --source docker.io/library/nginx:latest --image nginx:v
 #https://learn.microsoft.com/en-us/azure/container-registry/container-registry-firewall-access-rules
 # Add FW Application Rules for publics ARC
 az network firewall application-rule create -g $RG -f $FWNAME --collection-name 'aksfwar' -n 'acrlogin' \
---source-addresses '*' --protocols 'https=443' --target-fqdns 'myacregistry001.azurecr.io' 
+--source-addresses '*' --protocols 'https=443' --target-fqdns "${MYACR}.azurecr.io"
 
 az network firewall application-rule create -g $RG -f $FWNAME --collection-name 'aksfwar' -n 'acrdata' \
 --source-addresses '*' --protocols 'https=443' --target-fqdns '*.blob.core.windows.net' 
-
-## *.docker.io
-## production.cloudflare.docker.com
+##############
+## docker.io
+##############
+# az network firewall application-rule create -g $RG -f $FWNAME --collection-name 'aksfwar' -n 'acrdata' \
+# --source-addresses '*' --protocols 'https=443' --target-fqdns '*.docker.io' 
 #
-#curl -s -Lo fuju-nginx.yaml https://raw.githubusercontent.com/fujute/m18h/master/aks/fuju-nginx-ilb.yaml
-## chage the image from ningx to  $MYACR.azurecr.io/nginx:v1
+# az network firewall application-rule create -g $RG -f $FWNAME --collection-name 'aksfwar' -n 'acrdata' \
+# --source-addresses '*' --protocols 'https=443' --target-fqdns 'production.cloudflare.docker.com' 
+#
+# curl -s -Lo fuju-nginx.yaml https://raw.githubusercontent.com/fujute/m18h/master/aks/fuju-nginx-ilb.yaml
+## chage the image from ningx to  $MYACR.azurecr.io/nginx:v1 for example myacregistry001.azurecr.io/nginx:v1
 # 
 #az aks show --name $AKSNAME --resource-group $RG
+
+#############################################################################################################
+##### Azure Database for PostgreSQL 
+############################################################################################################
+# Subnet for VM client to Private AKS )
+# https://learn.microsoft.com/en-us/azure/postgresql/flexible-server/concepts-networking
+# The smallest CIDR range you can specify for a subnet is /28
+#
+az network nsg create --resource-group $RG --name DBSubnetNsg
+
+az network vnet subnet create \
+    --resource-group $RG \
+    --vnet-name $VNET_NAME \
+    --name $DBSUBNET_NAME \
+    --address-prefix 10.42.4.0/24 \
+    --network-security-group DBSubnetNsg 
+
+# create private dns zone
+az network private-dns zone create -g $RG -n "pid${PROJECT_ID}.private.postgres.database.azure.com"
+
+DBSUBNET_ID=$(az network vnet subnet show --resource-group $RG --vnet-name $VNET_NAME --name ${DBSUBNET_NAME} --query id -o tsv)
+PSQL_DNS=$(az network private-dns zone show --resource-group  $RG -n "pid${PROJECT_ID}.private.postgres.database.azure.com"  --query id -o tsv)
+
+az postgres flexible-server create --resource-group $RG --name "psql${PROJECT_ID}svr" \
+  --admin-user ${PGADMIN_USERNAME} --admin-password ${RANDOM_PWD} \
+  --sku-name Standard_B1ms --tier Burstable --version 13 \
+  --vnet $VNET_NAME  --subnet ${DBSUBNET_NAME} --location  $LOC \
+  --private-dns-zone $PSQL_DNS
+
+az vm run-command invoke \
+   -g $RG \
+   -n my2VM$PROJECT_ID  \
+   --command-id RunShellScript \
+   --scripts "sudo apt-get update -y && sudo apt-get upgrade -y && sudo apt install  postgresql-client -y "
+
+
+echo "#####psql connect #####"
+echo "psql \"host=psql${PROJECT_ID}svr.postgres.database.azure.com port=5432 dbname=postgres user=pgadmin password=${RANDOM_PWD} sslmode=require \""
+echo "docker run -it --rm bitnami/postgresql:latest psql \"host=psql${PROJECT_ID}svr.postgres.database.azure.com port=5432 dbname=db0010 user=pgadmin password=${RANDOM_PWD} sslmode=require\""
+
+#############################################################################################################
 # Final
 # az group delete -g $RG
 ##############################################################################################################
 
 ## See Also:
 # https://learn.microsoft.com/en-us/samples/azure/azure-quickstart-templates/private-aks-cluster-with-public-dns-zone/?source=recommendations
+# https://techcommunity.microsoft.com/t5/azure-database-for-postgresql/private-networking-patterns-in-azure-database-for-postgres/ba-p/3007149
+# PostgreSQL
+## https://learn.microsoft.com/en-us/azure/postgresql/flexible-server/tutorial-django-aks-database
+##  https://learn.microsoft.com/en-us/azure/app-service/tutorial-python-postgresql-app 
+### git clone https://github.com/Azure-Samples/msdocs-django-postgresql-sample-app.git
+### docker run  -e myhost='localhost' -it --rm busybox sh
