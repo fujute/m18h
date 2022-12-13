@@ -1,6 +1,7 @@
 #!/bin/bash
 # Modified from Original from  https://learn.microsoft.com/en-us/azure/aks/limit-egress-traffic  to run AKS with kubenet
-# 
+# 12-12-2022
+#
 _RN=01
 PREFIX="aks-egress"
 RG="101-${PREFIX}-rg"
