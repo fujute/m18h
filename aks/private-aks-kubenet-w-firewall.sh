@@ -177,6 +177,20 @@ az vm run-command invoke \
    -n my2VM$PROJECT_ID \
    --command-id RunShellScript \
    --scripts "sudo apt-get update -y && curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash "
+   
+MYVMIP="$(az vm list-ip-addresses \
+                 --resource-group $rg \
+                 --name my2VM${PROJECT_ID} \
+                 --query "[].virtualMachine.network.publicIpAddresses[*].ipAddress" \
+                 --output tsv)"
+echo "my2VM${PROJECT_ID} address is $MYVMIP"
+
+# show vm status with private IP and Public IP 
+az vm list \
+    --resource-group $rg \
+    --show-details \
+    --query "[*].{Name:name, Provisioned:provisioningState, Power:powerState, PrivateIP:privateIps, PublicIP:publicIps}" \
+    --output table
 
 ################################################################################################################
 ## Manual Test from VM to AKS via private IP
