@@ -7,7 +7,7 @@ LOCATION="westus2"
 
 az group create --name ${RG} --location eastus2
 
-#fix node
+# 1.1 Deploy fixed node
 az aks create \
     --resource-group ${RG} \
     --name ${AKSNAME} \
@@ -36,16 +36,12 @@ kubectl scale deployment nginx --replicas=3
 kubectl describe pod | grep -e "^Name:" -e "^Node:"
 ## 
 
-
-az group delete --name ${RG} 
-az group delete --name 1TL-300323-AKSAZ-RG
-
 ## Second Cluster 
 RG="1TL-300323-AKSAZ-RG-01"
 AKSNAME="myAKSCluster300302"
 LOCATION="westus2"
 
-#autoscale
+# 1.2 Deploy autoscale
 az aks create \
     --resource-group ${RG} \
     --name ${AKSNAME} \
@@ -73,3 +69,6 @@ az aks update --resource-group ${RG} --name ${AKSNAME} \
 --update-cluster-autoscaler --min-count 3 --max-count 6
 
 kubectl get nodes -o custom-columns=NAME:'{.metadata.name}',REGION:'{.metadata.labels.topology\.kubernetes\.io/region}',ZONE:'{metadata.labels.topology\.kubernetes\.io/zone}'
+
+# Cleaning 
+az group delete --name ${RG} 
